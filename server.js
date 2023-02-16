@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const fspath = require("path");
 const app = express();
 const dotenv = require("dotenv");
+const userRouter = require("./app/routes/user.routes");
 dotenv.config({ path: fspath.resolve(__dirname, ".env") });
 var corsOptions = {
   origin: "http://localhost:8081",
@@ -13,7 +14,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-const db = require( "./app/models" );
+const db = require("./app/models");
 
 db.sequelize.sync().then(() => {
   console.log("Drop and Resync Db");
@@ -25,6 +26,9 @@ app.get("/", (req, res) => {
 });
 
 // routes
+app.use("/api/user", userRouter);
+app.use("/api/auth", userRouter);
+
 // set port, listen for requests
 console.log(`Server is running on port ` + process.env.NODE_APP_PORT);
 // Handling Errors
