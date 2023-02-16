@@ -1,0 +1,19 @@
+# ignore node_modules
+node_modules/
+/node_modules
+node_modules
+
+# vs-code
+.vscode
+
+# ignore .env
+.env
+
+# ignore .env.local
+.env.local
+
+# package-lock.json
+package-lock.json
+
+# pnpm-lock.yaml
+pnpm-lock.yaml
