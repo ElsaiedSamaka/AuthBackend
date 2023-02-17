@@ -61,8 +61,16 @@ const signin = async (req, res) => {
 };
 // signout controller
 const signedin = async (req, res) => {
+  // console.log(req.userId);
   try {
-    res.send("user is signedin");
+    const user = await User.findOne({
+      where: {
+        id: req.userId,
+      },
+    });
+    const token = createToken(user.id);
+    res.cookie("token", token, { maxAge: 86400, httpOnly: true });
+    res.send("Welcome " + user.firstname + " !)");
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
