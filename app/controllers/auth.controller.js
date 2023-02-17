@@ -3,6 +3,7 @@ const config = require("../config/auth.config");
 const User = db.user;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const createToken = require("../utils/createToken");
 
 // signup controller
 const signup = async (req, res) => {
@@ -16,7 +17,9 @@ const signup = async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 8),
     });
     await user.save();
-    res.status(201).json(user);
+    const token = createToken(user.id);
+    res.cookie("token", token, { maxAge: 86400 , httpOnly: true});
+    res.status(201).json({ user: user, accessToken: token });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -43,9 +46,9 @@ const signin = async (req, res) => {
         message: "Invalid Password!",
       });
     }
-    var token = jwt.sign({ id: existing_user.id }, config.secret, {
-      expiresIn: 86400, // 24 hours
-    });
+
+    const token = createToken(existing_user.id);
+    res.cookie("token", token, { maxAge: 86400 , httpOnly: true});
     res.status(200).send({
       id: existing_user.id,
       firstname: existing_user.username,
@@ -56,6 +59,7 @@ const signin = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+// signout controller
 const signedin = async (req, res) => {
   try {
     res.send("signedin");

@@ -4,15 +4,21 @@ const bodyParser = require("body-parser");
 const fspath = require("path");
 const app = express();
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 const authRouter = require("./app/routes/auth.routes");
 dotenv.config({ path: fspath.resolve(__dirname, ".env") });
 
+// allow cross origin requests
 app.use(cors());
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// parse cookies
+app.use(cookieParser());
+
 const db = require("./app/models");
 
 db.sequelize.sync().then(() => {
@@ -38,13 +44,7 @@ app.use((err, req, res, next) => {
     message: err.message,
   });
 });
-app.use(function (req, res, next) {
-  res.header(
-    "Access-Control-Allow-Headers",
-    "x-access-token, Origin, Content-Type, Accept"
-  );
-  next();
-});
+
 const PORT = process.env.NODE_APP_PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
