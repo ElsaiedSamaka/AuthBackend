@@ -24,7 +24,6 @@ const signup = async (req, res) => {
 
 // signin controller
 const signin = async (req, res) => {
-  console.log(req.body);
   try {
     const existing_user = await User.findOne({
       where: {
