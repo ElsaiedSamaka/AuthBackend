@@ -14,7 +14,8 @@ const signup = async (req, res) => {
       phonenumber: req.body.phonenumber,
       countrycode: req.body.countrycode,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 8),
+      password: bcrypt.hashSync(req.body.password, 10),
+      passwordConfirmation: bcrypt.hashSync(req.body.passwordConfirmation, 10),
     });
     await user.save();
     const token = createToken(user.id);

@@ -24,10 +24,28 @@ module.exports = (sequelize, Sequelize) => {
       },
     },
     password: {
+      // type: Sequelize.VIRTUAL,
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
+        notNull: {
+          msg: "Please enter your password",
+        },
+        notEmpty: {
+          msg: "Please enter your password",
+        },
         min: 8,
+        max: 20,
+      },
+      passwordConfirmation: {
+        // type: Sequelize.VIRTUAL,
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "both passwords must match",
+          },
+        },
       },
     },
   });

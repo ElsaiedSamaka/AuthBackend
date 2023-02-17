@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Zamalek#1997",
+    "database": "auth_app",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "Zamalek#1997",
+    "database": "auth_app",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

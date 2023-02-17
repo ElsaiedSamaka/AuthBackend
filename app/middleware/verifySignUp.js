@@ -17,7 +17,18 @@ checkDuplicateEmail = (req, res, next) => {
     next();
   });
 };
+checkPasswordConfirmation = (req, res, next) => {
+  // Password
+  if (req.body.password !== req.body.passwordConfirmation) {
+    res.status(400).send({
+      message: "Failed! Passwords do not match!",
+    });
+    return;
+  }
+  next();
+};
 const verifySignUp = {
   checkDuplicateEmail,
+  checkPasswordConfirmation,
 };
 module.exports = verifySignUp;
