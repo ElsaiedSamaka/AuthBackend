@@ -7,12 +7,12 @@ var bcrypt = require("bcryptjs");
 // signup controller
 const signup = async (req, res) => {
   try {
-    const existing_user = await User.findOne({
-      where: { email: req.body.email },
-    });
-    if (existing_user) {
-      return res.status(409).json({ message: "User email already exists" });
-    }
+    // const existing_user = await User.findOne({
+    //   where: { email: req.body.email },
+    // });
+    // if (existing_user) {
+    //   return res.status(409).json({ message: "User email already exists" });
+    // }
     const user = await User.create({
       firstname: req.body.firstname,
       secondname: req.body.secondname,
@@ -62,8 +62,18 @@ const signin = async ( req, res ) => {
         res.status( 500 ).send( { message: error.message } );
     }
 }
+// signout controller
+// TODO: Implement signout controller
+const signout = async ( req, res ) => {
+    try {
+        res.status( 200 ).send( { message: "User signed out successfully!" } );
+    } catch ( error ) {
+        res.status( 500 ).send( { message: error.message } );
+    }
+}
 
 module.exports = {
   signup,
   signin,
+  signout,
 };

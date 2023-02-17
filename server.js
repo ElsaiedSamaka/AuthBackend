@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 // routes
-app.use("/api/auth", authRouter);
+app.use( "/api/auth", authRouter );
 
 // set port, listen for requests
 console.log(`Server is running on port ` + process.env.NODE_APP_PORT);
