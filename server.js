@@ -1,12 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const fspath = require("path");
 const app = express();
-const dotenv = require("dotenv");
+require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const authRouter = require("./app/routes/auth.routes");
-dotenv.config({ path: fspath.resolve(__dirname, ".env") });
 
 // allow cross origin requests
 app.use(cors());
