@@ -62,7 +62,7 @@ const signin = async (req, res) => {
 // signout controller
 const signedin = async (req, res) => {
   try {
-    res.send("signedin");
+    res.send("user is signedin");
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -71,6 +71,8 @@ const signedin = async (req, res) => {
 // TODO: Implement signout controller
 const signout = async (req, res) => {
   try {
+    res.clearCookie("token");
+    // res.cookie("token", "", { maxAge: 1, httpOnly: true });
     res.status(200).send({ message: "User signed out successfully!" });
   } catch (error) {
     res.status(500).send({ message: error.message });
