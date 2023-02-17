@@ -12,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 const db = require("./app/models");
 
 db.sequelize.sync().then(() => {
