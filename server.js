@@ -4,12 +4,10 @@ const bodyParser = require("body-parser");
 const fspath = require("path");
 const app = express();
 const dotenv = require("dotenv");
-const userRouter = require("./app/routes/user.routes");
+const authRouter = require("./app/routes/auth.routes");
 dotenv.config({ path: fspath.resolve(__dirname, ".env") });
-var corsOptions = {
-  origin: "http://localhost:8081",
-};
-app.use(cors(corsOptions));
+
+app.use(cors());
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -26,8 +24,7 @@ app.get("/", (req, res) => {
 });
 
 // routes
-app.use("/api/user", userRouter);
-app.use("/api/auth", userRouter);
+app.use("/api/auth", authRouter);
 
 // set port, listen for requests
 console.log(`Server is running on port ` + process.env.NODE_APP_PORT);
@@ -39,6 +36,13 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode).json({
     message: err.message,
   });
+});
+app.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
 });
 const PORT = process.env.NODE_APP_PORT || 3000;
 app.listen(PORT, () => {
