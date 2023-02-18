@@ -11,6 +11,11 @@ router.post(
 );
 router.post("/signin", authController.signin);
 router.post("/signout", authController.signout);
-router.get("/signedin", [checkUser.getCurrentUser], authController.signedin);
+router.get( "/signedin", [ checkUser.getCurrentUser ], authController.signedin );
+router.post(
+  "/username",
+  [verifySignUp.checkDuplicateEmail],
+  authController.checkUserEmail
+);
 
 module.exports = router;

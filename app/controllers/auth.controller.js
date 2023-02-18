@@ -76,6 +76,15 @@ const signedin = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+// checkUserEmail controller
+const checkUserEmail = async ( req, res ) => {
+  try {
+    res.status( 200 ).send( { message: "User email is available!" } );
+  } catch ( error ) {
+    res.status( 500 ).send( { message: error.message } );
+  }
+}
 // signout controller
 // TODO: Implement signout controller
 const signout = async (req, res) => {
@@ -93,4 +102,5 @@ module.exports = {
   signin,
   signout,
   signedin,
+  checkUserEmail
 };
