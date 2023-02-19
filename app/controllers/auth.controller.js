@@ -10,7 +10,7 @@ const signup = async (req, res) => {
   try {
     const user = await User.create({
       firstname: req.body.firstname,
-      secondname: req.body.secondname,
+      lastname: req.body.lastname,
       phonenumber: req.body.phonenumber,
       countrycode: req.body.countrycode,
       email: req.body.email,
