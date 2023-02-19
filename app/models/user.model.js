@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     countrycode: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: Sequelize.STRING,
