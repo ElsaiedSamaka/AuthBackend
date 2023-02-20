@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const authRouter = require("./app/routes/auth.routes");
 
 // allow cross origin requests
-app.use(cors());
+app.use(cors({ origin: "http://localhost:4200", credentials: true }));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 // routes
-app.use( "/api/auth", authRouter );
+app.use("/api/auth", authRouter);
 
 // set port, listen for requests
 console.log(`Server is running on port ` + process.env.NODE_APP_PORT);
@@ -41,6 +41,13 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode).json({
     message: err.message,
   });
+});
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+  res.header("Access-Control-Allow-Credentials", true);
+  next(); // Important
 });
 
 const PORT = process.env.NODE_APP_PORT || 3000;

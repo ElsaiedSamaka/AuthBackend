@@ -4,7 +4,7 @@ const config = require("../config/auth.config.js");
 const getCurrentUser = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
-    return res.status(403).send({
+    return res.status(200).send({
       message: "No token provided!",
       authentication: false,
       username: null,
@@ -12,7 +12,7 @@ const getCurrentUser = (req, res, next) => {
   } else {
     jwt.verify(token, config.secret, (err, decoded) => {
       if (err) {
-        return res.status(401).send({
+        return res.status(200).send({
           message: "Unauthorized!",
           authentication: false,
           username: null,
