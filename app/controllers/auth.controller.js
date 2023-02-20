@@ -71,7 +71,7 @@ const signedin = async (req, res) => {
     });
     const token = createToken(user.id);
     res.cookie("token", token, { maxAge: 86400, httpOnly: true });
-    res.send("Welcome " + user.firstname + " !)");
+    res.send({ message: `Welcome  ${user.firstname} +  !)` });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
