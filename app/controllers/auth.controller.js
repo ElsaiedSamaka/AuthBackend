@@ -20,7 +20,7 @@ const signup = async (req, res) => {
     await user.save();
     const token = createToken(user.id);
     res.cookie("token", token, { maxAge: 86400 , httpOnly: true});
-    res.status(201).json({ user: user, accessToken: token });
+    res.status(201).json({ user: user });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
