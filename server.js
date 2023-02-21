@@ -1,13 +1,19 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const app = express();
-require("dotenv").config();
 const cookieParser = require("cookie-parser");
+const swaggerDoc = require("swagger-ui-express");
 const authRouter = require("./app/routes/auth.routes");
+const swaggerDocument = require("./helper/swaggerDocument");
+const app = express();
+
+// swagger
+app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 
 // allow cross origin requests
-app.use(cors({ origin: "http://localhost:4200", credentials: true }));
+// TODO: change origin to the client url origin: 'http://localhost:4200'
+app.use(cors({ credentials: true }));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
