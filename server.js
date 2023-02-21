@@ -25,9 +25,9 @@ app.use(cookieParser());
 
 const db = require("./app/models");
 
-db.sequelize.sync().then(() => {
-  console.log("Drop and Resync Db");
-});
+// db.sequelize.sync().then(() => {
+//   console.log("Drop and Resync Db");
+// });
 db.sequelize.sync();
 // simple route
 app.get("/", (req, res) => {
