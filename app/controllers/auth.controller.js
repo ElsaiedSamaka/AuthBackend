@@ -35,7 +35,7 @@ const signin = async (req, res) => {
       },
     });
     if (!existing_user) {
-      return res.status(404).json({ message: "User Not found." });
+      return res.status(401).json({ message: "User Not found." });
     }
     var passwordIsValid = bcrypt.compareSync(
       req.body.password,
