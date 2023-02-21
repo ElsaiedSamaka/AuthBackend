@@ -13,7 +13,7 @@ app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 
 // allow cross origin requests
 // TODO: change origin to the client url origin: 'http://localhost:4200'
-app.use(cors({ credentials: true }));
+app.use(cors({ origin: "http://localhost:4200", credentials: true }));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
