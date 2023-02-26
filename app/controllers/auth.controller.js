@@ -54,7 +54,7 @@ const signin = async (req, res) => {
       id: existing_user.id,
       firstname: existing_user.username,
       email: existing_user.email,
-      accessToken: token,
+      // accessToken: token,
     });
   } catch (error) {
     res.status(500).send({ message: error.message });
