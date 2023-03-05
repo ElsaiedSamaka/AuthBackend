@@ -12,7 +12,6 @@ const app = express();
 app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 
 // allow cross origin requests
-// TODO: change origin to the client url origin: 'http://localhost:4200'
 app.use(cors({ origin: "http://localhost:4200", credentials: true }));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -25,9 +24,6 @@ app.use(cookieParser());
 
 const db = require("./app/models");
 
-// db.sequelize.sync().then(() => {
-//   console.log("Drop and Resync Db");
-// });
 db.sequelize.sync();
 // simple route
 app.get("/", (req, res) => {

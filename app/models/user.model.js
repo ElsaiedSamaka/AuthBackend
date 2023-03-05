@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
     phonenumber: {
       type: Sequelize.INTEGER,
       allowNull: false,
+      validate: {
+        isNumeric: true,
+      },
     },
     countrycode: {
       type: Sequelize.INTEGER,
@@ -24,21 +27,14 @@ module.exports = (sequelize, Sequelize) => {
       },
     },
     password: {
-      // type: Sequelize.VIRTUAL,
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notNull: {
           msg: "Please enter your password",
         },
-        notEmpty: {
-          msg: "Please enter your password",
-        },
-        min: 8,
-        max: 20,
       },
       passwordConfirmation: {
-        // type: Sequelize.VIRTUAL,
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
