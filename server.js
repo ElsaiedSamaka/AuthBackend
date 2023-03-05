@@ -14,6 +14,7 @@ app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 // allow cross origin requests
 app.use(
   cors({
+    origin: "https://auth-client-saiedsamaka.vercel.app",
     credentials: true,
   })
 );
