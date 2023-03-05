@@ -4,7 +4,6 @@ const schemas = {
     firstname: Joi.string().alphanum().required(),
     lastname: Joi.string().required(),
     phonenumber: Joi.number().required(),
-    countrycode: Joi.number().required(),
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
       .required(),
