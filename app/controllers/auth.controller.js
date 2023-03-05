@@ -19,7 +19,7 @@ const signup = async (req, res) => {
     });
     await user.save();
     const token = createToken(user.id);
-    res.cookie("token", token, { maxAge: 86400 , httpOnly: true});
+    res.cookie("token", token, { maxAge: 86400 });
     res.status(201).json({ user: user });
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -49,7 +49,7 @@ const signin = async (req, res) => {
     }
 
     const token = createToken(existing_user.id);
-    res.cookie("token", token, { maxAge: 86400 , httpOnly: true});
+    res.cookie("token", token, { maxAge: 86400 });
     res.status(200).send({
       id: existing_user.id,
       firstname: existing_user.username,
@@ -70,7 +70,7 @@ const signedin = async (req, res) => {
       },
     });
     const token = createToken(user.id);
-    res.cookie("token", token, { maxAge: 86400, httpOnly: true });
+    res.cookie("token", token, { maxAge: 86400 });
     res.send({
       message: `Welcome  ${user.firstname} !)`,
       authentication: true,
