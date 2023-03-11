@@ -24,11 +24,7 @@ app.use(passport.session());
 app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 
 // allow cross origin requests
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors());
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
