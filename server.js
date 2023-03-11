@@ -27,7 +27,6 @@ app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 app.use(
   cors({
     origin: "*",
-    credentials: true,
   })
 );
 // parse requests of content-type - application/json
