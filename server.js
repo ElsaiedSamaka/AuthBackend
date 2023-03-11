@@ -60,13 +60,13 @@ app.use((err, req, res, next) => {
     message: err.message,
   });
 });
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
-  res.header("Access-Control-Allow-Credentials", true);
-  next(); // Important
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+//   res.header("Access-Control-Allow-Credentials", true);
+//   next(); // Important
+// });
 
 const PORT = process.env.NODE_APP_PORT || 3000;
 app.listen(PORT, () => {
