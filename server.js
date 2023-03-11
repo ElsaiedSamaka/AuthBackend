@@ -24,11 +24,7 @@ app.use(passport.session());
 app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 
 // allow cross origin requests
-app.use(
-  cors({
-    origin: "http://localhost:4200",
-  })
-);
+app.use(cors());
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -60,13 +56,13 @@ app.use((err, req, res, next) => {
     message: err.message,
   });
 });
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-//   res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   next(); // Important
-// });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+  res.header("Access-Control-Allow-Credentials", true);
+  next(); // Important
+});
 
 const PORT = process.env.NODE_APP_PORT || 3000;
 app.listen(PORT, () => {
