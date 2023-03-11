@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 const authController = require("../controllers/auth.controller");
 const { verifySignUp, joiMiddleware } = require("../middleware");
@@ -16,11 +17,19 @@ router.post(
 );
 router.post("/signin", authController.signin);
 router.post("/signout", authController.signout);
-router.get( "/signedin", [ checkUser.getCurrentUser ], authController.signedin );
+router.get("/signedin", [checkUser.getCurrentUser], authController.signedin);
 router.post(
   "/username",
   [verifySignUp.checkDuplicateEmail],
   authController.checkUserEmail
 );
+
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+router.get("/google/callback", passport.authenticate("google"), (req, res) => {
+  res.redirect("/");
+});
 
 module.exports = router;

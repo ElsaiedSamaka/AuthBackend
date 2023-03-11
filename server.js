@@ -4,17 +4,29 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const swaggerDoc = require("swagger-ui-express");
+const passport = require("passport");
 const authRouter = require("./app/routes/auth.routes");
 const swaggerDocument = require("./helper/swaggerDocument");
 const app = express();
-
+const session = require("express-session");
+// For Passport
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+require("./app/utils/passport");
+app.use(passport.initialize());
+app.use(passport.session());
 // swagger
 app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 
 // allow cross origin requests
 app.use(
   cors({
-    origin: "https://auth-client-saiedsamaka.vercel.app",
+    origin: "*",
     credentials: true,
   })
 );
