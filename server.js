@@ -24,7 +24,13 @@ app.use(passport.session());
 app.use("/api-docs", swaggerDoc.serve, swaggerDoc.setup(swaggerDocument));
 
 // allow cross origin requests
-app.use(cors());
+app.use(
+  cors({
+    // origin: "https://auth-client-saiedsamaka.vercel.app",
+    origin: "http://localhost:4200",
+    credentials: true,
+  })
+);
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
